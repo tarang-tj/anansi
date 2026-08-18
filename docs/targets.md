@@ -64,6 +64,31 @@ loaded and shown to carry different organisation data.** A directory that turns
 out to be a JS app or an embedded widget costs 15-25 minutes of scraper
 generation to discover, which is the most expensive way to learn it.
 
+## Why Shape A is scarce here — a finding, not a dead end
+
+Searching for a true directory-plus-detail-pages target in this vertical kept
+failing the same way, and the pattern is worth stating because it argues for the
+project rather than against it.
+
+Checked and rejected on structure:
+
+| Site | What it actually serves |
+|---|---|
+| Clark County Food Bank `/our-network` | 246KB of HTML, but 93 internal links all sit at the root, there are no per-agency blocks, and the agency list arrives in a single JSON blob consumed by a map. |
+| All Faiths Food Bank partner directory | 131KB, only 2 phone numbers in the markup, and an embedded map widget carrying the actual listings. |
+
+Small aid organisations publish their directories through **embedded third-party
+map widgets** or as **flat CMS pages**. Almost none of them expose a structured
+per-organisation URL, because almost none of them have a CMS that would produce
+one.
+
+That is precisely why this data is the long tail, and precisely why it is worth
+the project. There is no structured layer to scrape, no API, and no pre-built
+scraper — the information exists only as markup that a person hand-maintained
+and will hand-change without warning. It is also a reason to be careful:
+scraping the embedded widget usually means scraping Google Maps, which the
+pre-built library already covers and which best-practice #1 rules out.
+
 ## Current position
 
 One verified real target (Fairfax, Shape B) plus the mutation testbed is enough
