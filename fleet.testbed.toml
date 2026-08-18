@@ -1,5 +1,15 @@
-# The single collector pointed at the mutation testbed on GitHub Pages.
-# Used only by the healing-proof workflow.
+# The collector pointed at the mutation testbed, used by the healing proof.
+#
+# The testbed is live at https://tarang-tj.github.io/anansi/ and its layout can
+# be changed on demand with:
+#
+#   scripts/deploy-testbed.sh m5_field_split
+#
+# Create the collector with:
+#   bdata scraper create https://tarang-tj.github.io/anansi/ \
+#     "For each food pantry listed, extract the organisation name, street
+#      address, phone number, opening hours, services offered, eligibility
+#      requirements and languages spoken."
 
 [collectors]
 # c_xxxxxxxx = "https://tarang-tj.github.io/anansi/"

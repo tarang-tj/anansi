@@ -88,8 +88,17 @@ Every theme renders the **same data**. Only the markup moves — which is what
 makes the test honest: the information is still there and still extractable,
 just no longer where the collector learned to look.
 
-CI runs the loop end to end: **green → mutate → detect red → heal → green**,
-with the same Collector ID throughout and nothing downstream touched.
+The testbed is live at **https://tarang-tj.github.io/anansi/** and any theme can
+be published to it with one command:
+
+```bash
+scripts/deploy-testbed.sh m5_field_split   # break it
+scripts/deploy-testbed.sh baseline         # put it back
+```
+
+So the loop runs end to end against a real public URL: **green → mutate →
+detect red → heal → green**, same Collector ID throughout, nothing downstream
+touched.
 
 ## Status
 

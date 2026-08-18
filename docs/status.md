@@ -32,6 +32,8 @@ Last updated: 2026-08-18
 | Heal does NOT re-fetch via `--url` | `--help`: "Not sent to the heal call; heal only mutates the scraper." The `--url` flag only decorates the next-step hint |
 | Heal polling timeout defaults to 600s, with 429 retry backoff | `--timeout`, `--max-retries` documented in `--help` |
 | `scraper run` routes batches via `/dca/trigger`; `--sync` caps at 25-50s | `bdata scraper run --help` |
+| **The mutation testbed is live and mutable on the public internet** | Deployed to https://tarang-tj.github.io/anansi/ via the gh-pages branch. Verified by fetching it: baseline serves a 1729-byte detail page with one `class="hours"` span; after `scripts/deploy-testbed.sh m5_field_split` the same URL serves 2071 bytes with seven `data-day` elements. Propagation under a minute |
+| `scripts/deploy-testbed.sh` renders and publishes any theme | Run for real against both `m5_field_split` and `baseline` |
 | The generated heal prompt is usable and within budget | `scripts/demo_detection.py` produced a 504-character prompt naming the field, its 100%-across-6-runs history, three real sample values, the six intact fields, and a scoped instruction |
 
 ## UNVERIFIED — blocked on a live Bright Data account
@@ -43,7 +45,7 @@ working, and the code is written to survive either answer.
 |---|---|---|
 | The JSON envelope shape returned by `bdata scraper run` | Records must be found in the payload | `extract_records` accepts a bare array plus five common wrapper keys; an unknown shape yields `[]`, which reads as a possible break rather than crashing |
 | `BRIGHTDATA_API_KEY` authenticates CI runs | Both scheduled workflows depend on it | The workflows fail loudly with an explicit error rather than silently skipping |
-| Scraper Studio will target a GitHub Pages testbed domain | The healing proof depends on it | Fall back to a recorded capture replayed through `RecordedBackend`, which is weaker evidence and would be labelled as such |
+| Scraper Studio will *accept* a GitHub Pages domain as a target | The healing proof depends on it | The testbed itself is now live and confirmed publicly reachable, so only Bright Data's willingness to target it remains open. Fallback is recorded-capture replay via `RecordedBackend`, labelled as weaker evidence |
 | `scraper create` / `scraper heal` do not consume page-load credits | Budget planning | Fleet capped at 4-5 collectors and mutations at 5 to stay inside the free tier plus the $50 promo |
 | No export exists for generated scraper source | Affects what the README may claim | If export does exist, it is upside: the scraper source gets versioned in-repo |
 
