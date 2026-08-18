@@ -1,0 +1,118 @@
+{
+  "collector_id": "c_demo_testbed",
+  "note": "Baseline layout. Every established field populated.",
+  "http_status": 200,
+  "html_bytes": 26010,
+  "record_count": 12,
+  "verdict": "healthy",
+  "records": [
+    {
+      "name": "Aldermoor Community Food Pantry",
+      "address": "14 Cobbler Lane, Aldermoor, Mercer Hollow County, State of Serenoa 00001",
+      "phone": "(555) 555-0101",
+      "hours": "Mon-Fri 9am-4pm",
+      "services": "Groceries, Diapers, Hygiene kits",
+      "eligibility": "Mercer Hollow County residents, no ID required",
+      "languages": "English, Spanish"
+    },
+    {
+      "name": "Ashgrove Family Wellness Pantry",
+      "address": "5 Ashgrove Terrace, Ashgrove, Mercer Hollow County, State of Serenoa 00012",
+      "phone": "(555) 555-0112",
+      "hours": "Mon-Fri 9am-4pm, Wed 9am-7pm",
+      "services": "Groceries, Baby formula, Clothing closet",
+      "eligibility": "Families with children under 18, no income verification",
+      "languages": "English, Spanish"
+    },
+    {
+      "name": "Briar Hollow Emergency Pantry",
+      "address": "6 Briar Patch Court, Briar Hollow, Mercer Hollow County, State of Serenoa 00007",
+      "phone": "(555) 555-0107",
+      "hours": "Mon-Fri 10am-2pm",
+      "services": "Groceries, Emergency food boxes",
+      "eligibility": "Same-day emergency need, no appointment",
+      "languages": "English, Spanish"
+    },
+    {
+      "name": "Cinderbrook Neighborhood Pantry",
+      "address": "18 Cinder Brook Path, Cinderbrook, Mercer Hollow County, State of Serenoa 00011",
+      "phone": "(555) 555-0111",
+      "hours": "Thu-Fri 1pm-6pm, Sat 9am-12pm",
+      "services": "Groceries, Fresh produce, Hygiene kits",
+      "eligibility": "Mercer Hollow County residents, self-declaration accepted",
+      "languages": "English"
+    },
+    {
+      "name": "Cobblestone Commons Free Clinic",
+      "address": "47 Commons Plaza, Cobblestone Commons, Mercer Hollow County, State of Serenoa 00006",
+      "phone": "(555) 555-0106",
+      "hours": "Mon-Fri 8am-4pm",
+      "services": "Primary care, Dental screenings, Mental health referrals",
+      "eligibility": "By appointment, sliding-scale fee",
+      "languages": "English, Spanish"
+    },
+    {
+      "name": "Foxglove Lane Free Clinic",
+      "address": "77 Foxglove Lane, Foxglove Lane, Mercer Hollow County, State of Serenoa 00010",
+      "phone": "(555) 555-0110",
+      "hours": "Mon-Fri 9am-5pm, Sat 10am-2pm",
+      "services": "Primary care, Women's health, Health screenings",
+      "eligibility": "Open to all, sliding-scale fee",
+      "languages": "English, Spanish, Mandarin"
+    },
+    {
+      "name": "Hollow Creek Family Resource Center",
+      "address": "220 Creekside Way, Hollow Creek, Mercer Hollow County, State of Serenoa 00004",
+      "phone": "(555) 555-0104",
+      "hours": "Mon-Fri 9am-3pm, Sat 9am-12pm",
+      "services": "Groceries, Clothing closet, Utility assistance, Job referrals",
+      "eligibility": "Mercer Hollow County residents with household income under 200% FPL",
+      "languages": "English, Spanish, Mandarin"
+    },
+    {
+      "name": "Millrace Crossing Food Shelf",
+      "address": "31 Millrace Crossing Road, Millrace Crossing, Mercer Hollow County, State of Serenoa 00009",
+      "phone": "(555) 555-0109",
+      "hours": "Mon-Sat 8am-6pm",
+      "services": "Groceries, Diapers, Pet food",
+      "eligibility": "Open to all, no ID required",
+      "languages": "English, Spanish"
+    },
+    {
+      "name": "Piner's Notch Neighborhood Pantry",
+      "address": "3 Notch Hollow Road, Piner's Notch, Mercer Hollow County, State of Serenoa 00003",
+      "phone": "(555) 555-0103",
+      "hours": "Tue-Sat 10am-6pm",
+      "services": "Groceries, Fresh produce, Baby formula",
+      "eligibility": "Open to all, income verification not required",
+      "languages": "English"
+    },
+    {
+      "name": "Sparrow Ridge Mobile Food Bank",
+      "address": "9 Ridge Line Trail, Sparrow Ridge, Mercer Hollow County, State of Serenoa 00005",
+      "phone": "(555) 555-0105",
+      "hours": "Wed 12pm-6pm, Sat 9am-1pm",
+      "services": "Groceries, Fresh produce",
+      "eligibility": "Open to all, no documentation required",
+      "languages": "English"
+    },
+    {
+      "name": "Thistlewood Free Clinic",
+      "address": "88 Whistler Row, Thistlewood, Mercer Hollow County, State of Serenoa 00002",
+      "phone": "(555) 555-0102",
+      "hours": "Mon-Thu 8am-5pm, Fri 8am-12pm",
+      "services": "Primary care, Vaccinations, Health screenings",
+      "eligibility": "Open to all, sliding-scale fee",
+      "languages": "English, Spanish, Vietnamese"
+    },
+    {
+      "name": "Wrenfield Community Health Outreach",
+      "address": "512 Wrenfield Avenue, Wrenfield, Mercer Hollow County, State of Serenoa 00008",
+      "phone": "(555) 555-0108",
+      "hours": "Tue-Thu 9am-5pm",
+      "services": "Primary care, Vaccinations, Chronic disease management",
+      "eligibility": "Uninsured and underinsured residents",
+      "languages": "English, Vietnamese"
+    }
+  ]
+}

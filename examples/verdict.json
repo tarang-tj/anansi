@@ -1,0 +1,81 @@
+{
+  "collector_id": "c_demo_testbed",
+  "state": "selector_break",
+  "should_heal": true,
+  "affected_fields": [
+    "hours"
+  ],
+  "confidence": 0.6,
+  "reasons": [
+    "'hours' populated in 0% of records, down from 100% across 6 runs"
+  ],
+  "baseline": {
+    "runs_observed": 6,
+    "mean_record_count": 12.0,
+    "fields": {
+      "address": {
+        "mean_fill_rate": 1.0,
+        "established": true,
+        "sample_values": [
+          "14 Cobbler Lane, Aldermoor, Mercer Hollow County, State of S",
+          "5 Ashgrove Terrace, Ashgrove, Mercer Hollow County, State of",
+          "6 Briar Patch Court, Briar Hollow, Mercer Hollow County, Sta"
+        ]
+      },
+      "eligibility": {
+        "mean_fill_rate": 1.0,
+        "established": true,
+        "sample_values": [
+          "Mercer Hollow County residents, no ID required",
+          "Families with children under 18, no income verification",
+          "Same-day emergency need, no appointment"
+        ]
+      },
+      "hours": {
+        "mean_fill_rate": 1.0,
+        "established": true,
+        "sample_values": [
+          "Mon-Fri 9am-4pm",
+          "Mon-Fri 9am-4pm, Wed 9am-7pm",
+          "Mon-Fri 10am-2pm"
+        ]
+      },
+      "languages": {
+        "mean_fill_rate": 1.0,
+        "established": true,
+        "sample_values": [
+          "English, Spanish",
+          "English",
+          "English, Spanish, Mandarin"
+        ]
+      },
+      "name": {
+        "mean_fill_rate": 1.0,
+        "established": true,
+        "sample_values": [
+          "Aldermoor Community Food Pantry",
+          "Ashgrove Family Wellness Pantry",
+          "Briar Hollow Emergency Pantry"
+        ]
+      },
+      "phone": {
+        "mean_fill_rate": 1.0,
+        "established": true,
+        "sample_values": [
+          "(555) 555-0101",
+          "(555) 555-0112",
+          "(555) 555-0107"
+        ]
+      },
+      "services": {
+        "mean_fill_rate": 1.0,
+        "established": true,
+        "sample_values": [
+          "Groceries, Diapers, Hygiene kits",
+          "Groceries, Baby formula, Clothing closet",
+          "Groceries, Emergency food boxes"
+        ]
+      }
+    }
+  }
+}
