@@ -21,7 +21,12 @@ Last updated: 2026-08-18
 | Every mutation is a real structural change | `diff -rq` against baseline differs for all five |
 | Every mutation relocates data rather than deleting it | Probed a known record across all six themes: name, phone and hours survive every mutation; m5 splits hours into 7 `data-day` elements |
 | Every generated testbed page carries the synthetic-data banner | 13/13 pages |
-| Gate: `ruff check` + `ruff format --check` + `mypy --strict` + `pytest` | Run locally, all green, 27 passed |
+| Gate: `ruff check` + `ruff format --check` + `mypy --strict` + `pytest` | Run locally, all green, 36 passed |
+| **Detection works against real mutated HTML, not just fixtures** | `tests/test_harness_integration.py` renders each theme and runs a fixed-selector scraper over it. m1, m4 and m5 are detected as `SELECTOR_BREAK`; m2 and m3 correctly produce no alert |
+| The detector does not cry wolf on cosmetic changes | m2 (hours nested in `<details>`) and m3 (`<span>` to `<dl>`) change the DOM but keep the class hooks, so extraction survives and the verdict stays `HEALTHY` |
+| m5 is surgical: only the split field is lost | `test_field_split_loses_only_the_field_it_split` — `affected_fields == ["hours"]`, six other fields still at 100% |
+| The detection tests can fail | Set `break_fill_rate` to -1.0 to disable the detector; all three `test_structural_mutation_is_detected` cases went red; restored, green |
+| The generated heal prompt is usable and within budget | `scripts/demo_detection.py` produced a 504-character prompt naming the field, its 100%-across-6-runs history, three real sample values, the six intact fields, and a scoped instruction |
 
 ## UNVERIFIED — blocked on a live Bright Data account
 

@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any
 
 from anansi.brightdata import BdataCli, RecordedBackend, ScraperBackend
+from anansi.dashboard import render_dashboard
 from anansi.models import HealthState
 from anansi.sentinel import Sentinel, SentinelReport
 from anansi.store import RunStore
@@ -101,6 +102,16 @@ def cmd_export(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_dashboard(args: argparse.Namespace) -> int:
+    """Render fleet health and heal history to a static HTML page."""
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with RunStore(args.db) as store:
+        out.write_text(render_dashboard(store))
+    print(f"wrote {out}")
+    return 0
+
+
 def cmd_prove(args: argparse.Namespace) -> int:
     """Assert the full loop on a deliberately mutated target: red, then green.
 
@@ -178,6 +189,12 @@ def build_parser() -> argparse.ArgumentParser:
     export = sub.add_parser("export", parents=[common], help="write structured output artifacts")
     export.add_argument("--out", default="examples")
     export.set_defaults(func=cmd_export)
+
+    dashboard = sub.add_parser(
+        "dashboard", parents=[common], help="render fleet health to a static HTML page"
+    )
+    dashboard.add_argument("--out", default="site/index.html")
+    dashboard.set_defaults(func=cmd_dashboard)
 
     prove = sub.add_parser(
         "prove",
