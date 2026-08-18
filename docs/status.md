@@ -26,6 +26,12 @@ Last updated: 2026-08-18
 | The detector does not cry wolf on cosmetic changes | m2 (hours nested in `<details>`) and m3 (`<span>` to `<dl>`) change the DOM but keep the class hooks, so extraction survives and the verdict stays `HEALTHY` |
 | m5 is surgical: only the split field is lost | `test_field_split_loses_only_the_field_it_split` — `affected_fields == ["hours"]`, six other fields still at 100% |
 | The detection tests can fail | Set `break_fill_rate` to -1.0 to disable the detector; all three `test_structural_mutation_is_detected` cases went red; restored, green |
+| **`bdata scraper heal --auto-approve` exists and is non-interactive** | `bdata scraper heal --help` on live CLI v0.3.x (runs without auth). Approval gate is real; default is "stop and let you review" |
+| **`--auto-save` is a SEPARATE required flag** | Same source: "With `--auto-approve`, also save the healed template automatically." Approving without saving leaves the collector running the old broken template. Caught and fixed; `test_heal_passes_both_approve_and_save` guards it |
+| `scraper approve` supports `--reject` and `--auto-save` | `bdata scraper approve --help` |
+| Heal does NOT re-fetch via `--url` | `--help`: "Not sent to the heal call; heal only mutates the scraper." The `--url` flag only decorates the next-step hint |
+| Heal polling timeout defaults to 600s, with 429 retry backoff | `--timeout`, `--max-retries` documented in `--help` |
+| `scraper run` routes batches via `/dca/trigger`; `--sync` caps at 25-50s | `bdata scraper run --help` |
 | The generated heal prompt is usable and within budget | `scripts/demo_detection.py` produced a 504-character prompt naming the field, its 100%-across-6-runs history, three real sample values, the six intact fields, and a scoped instruction |
 
 ## UNVERIFIED — blocked on a live Bright Data account
@@ -35,7 +41,6 @@ working, and the code is written to survive either answer.
 
 | Assumption | Why it matters | What happens if it is wrong |
 |---|---|---|
-| `bdata scraper heal --auto-approve` exists and runs non-interactively | It is what makes the loop autonomous in CI | The loop stops at the preview gate and a human approves. `--require-approval` already implements this path, and `test_heal_awaiting_approval_is_surfaced_not_swallowed` covers it |
 | The JSON envelope shape returned by `bdata scraper run` | Records must be found in the payload | `extract_records` accepts a bare array plus five common wrapper keys; an unknown shape yields `[]`, which reads as a possible break rather than crashing |
 | `BRIGHTDATA_API_KEY` authenticates CI runs | Both scheduled workflows depend on it | The workflows fail loudly with an explicit error rather than silently skipping |
 | Scraper Studio will target a GitHub Pages testbed domain | The healing proof depends on it | Fall back to a recorded capture replayed through `RecordedBackend`, which is weaker evidence and would be labelled as such |

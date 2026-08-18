@@ -5,12 +5,15 @@ whether they came from a live collector, a recorded capture, or a test fixture.
 That boundary is what lets the classifier -- the part being judged -- be tested
 exhaustively offline with no credentials and no credit burn.
 
-VERIFICATION STATUS: the exact JSON envelope returned by `bdata scraper run` is
-not documented publicly and has NOT yet been confirmed against a live account.
-`extract_records` therefore accepts every plausible shape rather than assuming
-one, and `docs/status.md` tracks this as an open verification item. Guessing a
-single shape and being wrong would fail silently, which is the exact class of
-bug this project exists to catch.
+VERIFICATION STATUS (see docs/status.md for the full ledger):
+
+- The command surface and every flag used here were verified against the real
+  CLI v0.3.x via `--help`, which runs without authentication.
+- The exact JSON envelope returned by a live `scraper run` is still unconfirmed,
+  since that needs an account. `extract_records` therefore accepts every
+  plausible shape rather than committing to one. Guessing a single shape and
+  being wrong would fail silently, which is precisely the class of bug this
+  project exists to catch.
 """
 
 from __future__ import annotations
@@ -86,14 +89,20 @@ class BdataCli:
     def heal(self, collector_id: str, prompt: str, auto_approve: bool = True) -> HealOutcome:
         """Ask Scraper Studio to repair the collector, preserving its ID.
 
-        `--auto-approve` skips the human review gate. When it is off (or if the
-        flag turns out not to exist on this CLI version), the command returns
-        with the fix staged and awaiting approval, which Anansi surfaces rather
-        than silently treating as success.
+        Both flags are required and they do different things, which is easy to
+        get wrong: `--auto-approve` clears the human review gate, while
+        `--auto-save` persists the healed template once the job completes.
+        Passing only the first approves a fix that is then never saved -- the
+        collector reports a successful heal and keeps running the old, broken
+        template. Verified against `bdata scraper heal --help` (CLI v0.3.x).
+
+        With auto-approve off, the command stops at the approval gate and
+        returns `awaiting_approval`, which Anansi surfaces rather than
+        mistaking for success.
         """
-        args = ["scraper", "heal", collector_id, prompt]
+        args = ["scraper", "heal", collector_id, prompt, "--json"]
         if auto_approve:
-            args.append("--auto-approve")
+            args += ["--auto-approve", "--auto-save"]
         proc = self._invoke(args)
         raw = _try_json(proc.stdout)
         status = str(raw.get("status", "")).lower()
@@ -104,12 +113,19 @@ class BdataCli:
             return HealOutcome(False, True, "fix staged, awaiting human approval", raw)
         return HealOutcome(True, False, status or "heal completed", raw)
 
-    def approve(self, collector_id: str) -> HealOutcome:
-        """Commit a staged fix after review."""
-        proc = self._invoke(["scraper", "approve", collector_id])
+    def approve(self, collector_id: str, reject: bool = False) -> HealOutcome:
+        """Commit a staged fix after review, or reject it.
+
+        `--auto-save` is passed for the same reason as in `heal`: approving
+        without saving leaves the collector running its old template.
+        """
+        args = ["scraper", "approve", collector_id, "--json"]
+        args.append("--reject") if reject else args.append("--auto-save")
+        proc = self._invoke(args)
         raw = _try_json(proc.stdout)
         ok = proc.returncode == 0
-        return HealOutcome(ok, False, "approved" if ok else _tail(proc.stderr), raw)
+        verb = "rejected" if reject else "approved and saved"
+        return HealOutcome(ok, False, verb if ok else _tail(proc.stderr), raw)
 
     def _invoke(self, args: list[str]) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
