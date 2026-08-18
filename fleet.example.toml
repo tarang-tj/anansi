@@ -1,0 +1,9 @@
+# Anansi fleet: the collectors to check, and the URL each one runs against.
+#
+# Collector IDs come from `bdata scraper create <url> "<what to extract>"`.
+# Copy this file to fleet.toml and fill in your own IDs. fleet.toml is
+# gitignored so a real fleet never lands in the repo by accident.
+
+[collectors]
+# c_example111 = "https://example.org/food-assistance/pantries"
+# c_example222 = "https://example.org/clinics"

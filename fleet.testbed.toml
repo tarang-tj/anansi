@@ -1,0 +1,5 @@
+# The single collector pointed at the mutation testbed on GitHub Pages.
+# Used only by the healing-proof workflow.
+
+[collectors]
+# c_xxxxxxxx = "https://tarang-tj.github.io/anansi/"

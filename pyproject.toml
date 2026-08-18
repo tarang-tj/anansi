@@ -1,0 +1,46 @@
+[project]
+name = "anansi"
+version = "0.1.0"
+description = "A self-healing data layer for the civic long tail, built on Bright Data Scraper Studio."
+readme = "README.md"
+requires-python = ">=3.12"
+# Zero runtime dependencies on purpose: a judge should be able to clone this
+# repo and run the gate without provisioning anything. The only external
+# surfaces are the `bdata` CLI (subprocess) and the Bright Data HTTPS API
+# (urllib), both isolated behind src/anansi/brightdata.py.
+dependencies = []
+
+[project.scripts]
+anansi = "anansi.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.7",
+    "mypy>=1.13",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/anansi"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["testbed/site"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src/anansi"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"

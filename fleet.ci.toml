@@ -1,0 +1,8 @@
+# Fleet checked by the scheduled GitHub Actions run.
+# Fill in after creating collectors with:
+#   bdata scraper create <url> "<what to extract>"
+# Unlike fleet.toml this file IS committed: Collector IDs are not secrets, and
+# a judge should be able to see exactly which collectors the schedule drives.
+
+[collectors]
+# c_xxxxxxxx = "https://example.org/food-assistance/pantries"
